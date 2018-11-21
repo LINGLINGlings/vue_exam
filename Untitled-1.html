@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fixed在ie下的兼容处理</title>
+    <style>
+        .ie{
+            _position: absolute;
+            _clear: both;
+            _top:expression(eval(document.compatMode &&
+               document.compatMode=='CSS1Compat') ?
+               documentElement.scrollTop
+               +(documentElement.clientHeight-this.clientHeight) - 1
+               : document.body.scrollTop
+               +(document.body.clientHeight-this.clientHeight) - 1);
+        }
+        .fixed{
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            left:50%;
+            top:0;
+            background:#000;
+            /*支持rgba的浏览器*/
+            background: rgba(0,0,0,.5);
+            /* older safari/Chrome browsers */
+            -webkit-opacity: 0.5;
+            /* Netscape and Older than Firefox 0.9 */
+            -moz-opacity: 0.5;
+            /* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/
+            -khtml-opacity: 0.5;
+            /* IE9 + etc...modern browsers */
+            opacity: .5;
+            /* IE 4-9 */
+            filter:alpha(opacity=50);
+            /*This works in IE 8 & 9 too*/
+            -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+            /*IE4-IE9*/
+            filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+        }
+        p{
+            margin:50px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <p>测试行测试行测试行测试行测试行测试行</p>
+    <p>测试行测试行测试行测试行测试行测试行</p>
+    <p>测试行测试行测试行测试行测试行测试行</p>
+    <p>测试行测试行测试行测试行测试行测试行</p>
+    <p>测试行测试行测试行测试行测试行测试行</p>
+    <p>测试行测试行测试行测试行测试行测试行</p>
+    <div class="fixed ie"></div>
+</body>
+</html>
